@@ -15,7 +15,7 @@ const AppNavigator = () => {
         component={ForumFlatlist}
       />
       <Stack.Screen
-        options={{ headerShown: false }}
+        options={{ title: "", headerShown: false }}
         name="ForumQnA"
         component={ForumQnA}
       />

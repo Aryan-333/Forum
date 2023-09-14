@@ -8,14 +8,19 @@ import {
   StyleSheet,
   TextInput,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { AntDesign, Entypo } from "@expo/vector-icons";
 
 const Topbar = () => {
+  const navigation = useNavigation();
+  const handleBackPress = () => {
+    navigation.goBack();
+  };
   return (
     <View style={styles.topBox}>
       <View style={styles.searchBar}>
-        <TouchableOpacity style={styles.arrow}>
+        <TouchableOpacity style={styles.arrow} onPress={handleBackPress}>
           <AntDesign name="arrowleft" size={24} color="black" />
         </TouchableOpacity>
       </View>

@@ -8,11 +8,8 @@ import { ForumQnA } from "./ForumQnA";
 import data from "../data/CardData";
 
 export const ForumFlatlist = ({ navigation }) => {
-  // const navigation = useNavigation();
-
   const handlePostPress = (post) => {
     navigation.navigate("ForumQnA", { post });
-    // console.log("I am inside handlePostPress");
   };
 
   return (

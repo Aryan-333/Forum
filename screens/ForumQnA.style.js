@@ -2,7 +2,13 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    // padding: 10,
+    backgroundColor: "#f0f0f0",
+  },
+  tweetCard: {
+    backgroundColor: "#f0f0f0",
+  },
+  container2: {
     backgroundColor: "lightgrey",
   },
   answer: {
@@ -20,6 +26,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 10,
     marginTop: 10,
+  },
+  stickyContainer: {
+    position: "sticky",
+    top: 0,
+    zIndex: 1,
+    backgroundColor: "white",
+    overflow: "hidden",
+    elevation: 2,
   },
 });
 
