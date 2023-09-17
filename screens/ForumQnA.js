@@ -1,5 +1,11 @@
 import React from "react";
-import { FlatList, View, Text, ScrollView } from "react-native";
+import {
+  FlatList,
+  View,
+  Text,
+  ScrollView,
+  KeyboardAvoidingView,
+} from "react-native";
 import Topbar from "../components/ForumQnA/Topbar";
 import AudioPlayer from "../components/ForumQnA/AudioPlayer";
 import styles from "./ForumQnA.style";
@@ -9,6 +15,7 @@ import MutualUpvotes from "../components/Forum/MutualUpvotes";
 import { CardBody } from "../components/Forum/CardBody";
 import { Tags } from "../components/Forum/Tags";
 import answer from "../data/Answer.json";
+import AddAnswer from "../components/ForumQnA/AddAnswer";
 
 export const ForumQnA = ({ route }) => {
   const { post } = route.params;
@@ -28,23 +35,34 @@ export const ForumQnA = ({ route }) => {
   );
 
   return (
-    <FlatList
-      data={data}
-      renderItem={renderItem}
-      keyExtractor={(item, index) => index.toString()}
-      ListHeaderComponent={() => (
-        <View style={styles.stickyContainer}>
-          <Topbar />
-          <View style={styles.tweetCard}>
-            <MutualUpvotes data={restData} />
-            <PostHeader data={restData} />
-            <CardBody data={restData} />
-            <Tags data={restData} />
-            <CardActionBar data={restData} />
+    <KeyboardAvoidingView
+      keyboardVerticalOffset={100}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+        ListHeaderComponent={() => (
+          <View style={styles.stickyContainer}>
+            <Topbar />
+            <View style={styles.tweetCard}>
+              <MutualUpvotes data={restData} />
+              <PostHeader data={restData} />
+              <CardBody data={restData} />
+              <Tags data={restData} />
+              <CardActionBar data={restData} />
+            </View>
           </View>
-        </View>
-      )}
-      stickyHeaderIndices={[0]}
-    />
+        )}
+        ListFooterComponent={() => (
+          <View style={styles.stickyFooter}>
+            <AddAnswer />
+          </View>
+        )}
+        stickyHeaderIndices={[0]}
+      />
+    </KeyboardAvoidingView>
   );
 };
