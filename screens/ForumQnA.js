@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  FlatList,
-  View,
-  Text,
-  ScrollView,
-  KeyboardAvoidingView,
-} from "react-native";
+import { FlatList, View, KeyboardAvoidingView, Platform } from "react-native";
 import Topbar from "../components/ForumQnA/Topbar";
 import AudioPlayer from "../components/ForumQnA/AudioPlayer";
 import styles from "./ForumQnA.style";
@@ -20,10 +14,22 @@ import AddAnswer from "../components/ForumQnA/AddAnswer";
 export const ForumQnA = ({ route }) => {
   const { post } = route.params;
   const { bodyImage, bodyLink, GIF, ...restData } = post;
+  const data = [{ isHeader: true }, ...answer, { isFooter: true }];
 
-  const data = answer;
+  const renderHeader = () => (
+    <View style={styles.stickyContainer}>
+      <Topbar />
+      <View style={styles.tweetCard}>
+        <MutualUpvotes data={restData} />
+        <PostHeader data={restData} />
+        <CardBody data={restData} />
+        <Tags data={restData} />
+        <CardActionBar data={restData} />
+      </View>
+    </View>
+  );
 
-  const renderItem = ({ item }) => (
+  const renderAnswer = (item) => (
     <View style={styles.container2}>
       <View style={styles.answer}>
         <PostHeader data={item} />
@@ -34,6 +40,18 @@ export const ForumQnA = ({ route }) => {
     </View>
   );
 
+  const renderFooter = () => (
+    <View style={styles.stickyFooter}>
+      <AddAnswer />
+    </View>
+  );
+
+  const renderItem = ({ item }) => {
+    if (item.isHeader) return renderHeader();
+    if (item.isFooter) return renderFooter();
+    return renderAnswer(item);
+  };
+
   return (
     <KeyboardAvoidingView
       keyboardVerticalOffset={100}
@@ -43,24 +61,9 @@ export const ForumQnA = ({ route }) => {
       <FlatList
         data={data}
         renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-        ListHeaderComponent={() => (
-          <View style={styles.stickyContainer}>
-            <Topbar />
-            <View style={styles.tweetCard}>
-              <MutualUpvotes data={restData} />
-              <PostHeader data={restData} />
-              <CardBody data={restData} />
-              <Tags data={restData} />
-              <CardActionBar data={restData} />
-            </View>
-          </View>
-        )}
-        ListFooterComponent={() => (
-          <View style={styles.stickyFooter}>
-            <AddAnswer />
-          </View>
-        )}
+        keyExtractor={(item, index) =>
+          item.isHeader ? "header" : item.isFooter ? "footer" : index.toString()
+        }
         stickyHeaderIndices={[0]}
       />
     </KeyboardAvoidingView>

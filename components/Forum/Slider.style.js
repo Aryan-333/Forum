@@ -14,6 +14,22 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 10,
   },
+  indicatorContainer: {
+    position: "absolute",
+    bottom: 10,
+    flexDirection: "row",
+    alignSelf: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    borderRadius: 15,
+    paddingHorizontal: 5,
+    paddingVertical: 5,
+  },
+  dot: {
+    width: 7,
+    height: 7,
+    borderRadius: 6,
+    marginLeft: 5,
+  },
   container1: {
     alignSelf: "center",
     width,
