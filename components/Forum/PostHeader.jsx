@@ -1,14 +1,13 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 import styles from "./PostHeader.style";
+import { Photo } from "../../designComponents/ProfileIcons/Photo";
+import { PhotoSize } from "../../designComponents/ProfileIcons/Photo";
 
 export const PostHeader = ({ data }) => {
   return (
     <View style={styles.header}>
-      <Image
-        source={{ uri: data.user.profile_image_url }}
-        style={styles.profileImage}
-      />
+      <Photo size={PhotoSize.$36} />
       <View style={styles.side}>
         <View style={styles.topRow}>
           <Text style={styles.username}>{data.user.name}</Text>
