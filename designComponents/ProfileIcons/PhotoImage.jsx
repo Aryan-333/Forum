@@ -46,7 +46,7 @@ export function PhotoImage(props) {
 
   return (
     <View style={classes.root}>
-      <Image source={PhotoImagePerson.Michael}></Image>
+      {/* <Image source={PhotoImagePerson.Michael}></Image> */}
     </View>
   );
 }
